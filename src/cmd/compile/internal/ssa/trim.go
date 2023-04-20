@@ -4,11 +4,22 @@
 
 package ssa
 
-import "cmd/internal/src"
+import (
+	"cmd/internal/src"
+)
 
 // trim removes blocks with no code in them.
 // These blocks were inserted to remove critical edges.
 func trim(f *Func) {
+	//
+	//defer func() {
+	//	if pkg := f.fe.MyImportPath(); pkg == "crypto/md5" && f.Name == "blockGeneric" {
+	//		fmt.Println("-------trimmed md5------")
+	//		fmt.Println(f.String())
+	//		fmt.Println("-------trimmed md5------")
+	//	}
+	//}()
+
 	n := 0
 	for _, b := range f.Blocks {
 		if !trimmableBlock(b) {
@@ -115,6 +126,13 @@ func trim(f *Func) {
 		}
 		f.Blocks = f.Blocks[:n]
 	}
+
+	//if pkg := f.fe.MyImportPath(); pkg == "crypto/md5" && f.Name == "blockGeneric" {
+	//	fmt.Println("-------after trim------")
+	//	fmt.Println(f.String())
+	//	fmt.Println("-------after trim------")
+	//	//panic("no more")
+	//}
 }
 
 // emptyBlock reports whether the block does not contain actual

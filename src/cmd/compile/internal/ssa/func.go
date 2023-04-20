@@ -365,6 +365,7 @@ func (f *Func) freeValue(v *Value) {
 		f.Fatalf("trying to free an already freed value")
 	}
 	if v.Uses != 0 {
+		fmt.Println(f.String())
 		f.Fatalf("value %s still has %d uses", v, v.Uses)
 	}
 	if len(v.Args) != 0 {
