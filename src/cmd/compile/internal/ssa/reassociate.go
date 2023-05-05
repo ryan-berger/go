@@ -27,7 +27,7 @@ func balanceExprTree(v *Value, visited map[*Value]bool, nodes, leafs []*Value) {
 		}
 	}
 
-	// we bfs'ed through the nodes in reverse topological order 
+	// we bfs'ed through the nodes in reverse topological order
 	// (expression dominated by all others to expression dominated by none of the others),
 	// we want to rebuild the tree reverse topological order
 	for i, j := 0, len(nodes)-1; i <= j; i, j = i+1, j-1 {
@@ -175,7 +175,7 @@ func rebalance(v *Value, visited map[*Value]bool) {
 	if len(leafs) < 4 || probablyMemcombine(v.Op, leafs){
 		return
 	}
-	
+
 	balanceExprTree(v, visited, nodes, leafs)
 }
 
@@ -186,7 +186,6 @@ func rebalance(v *Value, visited map[*Value]bool) {
 func reassociate(f *Func) {
 	visited := make(map[*Value]bool)
 
-	// iterate over values in reverse post order
 	for _, b := range f.Postorder() {
 		for i := len(b.Values) - 1; i >= 0; i-- {
 			val := b.Values[i]

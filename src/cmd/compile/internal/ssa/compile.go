@@ -527,6 +527,7 @@ var passOrder = [...]constraint{
 	// insert resched checks adds new blocks containing generic instructions
 	{"insert resched checks", "lower"},
 	{"insert resched checks", "tighten"},
+
 	// prove relies on common-subexpression elimination for maximum benefits.
 	{"generic cse", "prove"},
 	// deadcode after prove to eliminate all new dead blocks.
